@@ -1,0 +1,12 @@
+---
+
+  - name: restart samba
+    service: name={{ item }} state=restarted
+    become: yes
+    with_items:
+          - smbd
+          - nmbd
+
+  - name: restart nfs
+    service: name=nfs-kernel-server state=restarted
+    become: yes

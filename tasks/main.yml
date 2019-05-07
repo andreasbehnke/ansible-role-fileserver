@@ -1,0 +1,7 @@
+---
+
+ - include: samba.yml
+ - include: nfs.yml
+   when: nfs_enabled is defined and nfs_enabled
+ - include: users.yml
+ - include: folders.yml
