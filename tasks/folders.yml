@@ -5,6 +5,11 @@
     file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="0775" recurse=no state=directory follow=no
     with_items: "{{ public_file_shares }}"
     when: public_file_shares is defined
+  - name: create local file structure for public readonly shared files
+    become: yes
+    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="0555" recurse=no state=directory follow=no
+    with_items: "{{ public_readonly_file_shares }}"
+    when: public_readonly_file_shares is defined
   - name: create local file structure for private shared files
     become: yes
     file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="0770" recurse=no state=directory follow=no
