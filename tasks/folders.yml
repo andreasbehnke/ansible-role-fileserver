@@ -1,17 +1,73 @@
 ---
 
+  # public shared files
+
   - name: create local file structure for public shared files
     become: yes
-    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="0775" recurse=no state=directory follow=no
+    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="2775" state=directory
     with_items: "{{ public_file_shares }}"
     when: public_file_shares is defined
+
+  - name: set permission of all folders in directory tree to 2775
+    become: yes
+    command: find {{ item.path }} -type d ! -perm 2775 -exec chmod 2775 {} \; -exec echo "{}" \;
+    with_items: "{{ public_file_shares }}"
+    when: public_file_shares is defined
+    register: result
+    changed_when: result.stdout | length > 0
+
+  - name: set permission of all files in directory tree to 664
+    become: yes
+    command: find {{ item.path }} -type f ! -perm 664 -exec chmod 664 {} \; -exec echo "{}" \;
+    with_items: "{{ public_file_shares }}"
+    when: public_file_shares is defined
+    register: result
+    changed_when: result.stdout | length > 0
+
+    # public readonly shared files
+
   - name: create local file structure for public readonly shared files
     become: yes
-    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="0555" recurse=no state=directory follow=no
+    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="2755" state=directory
     with_items: "{{ public_readonly_file_shares }}"
     when: public_readonly_file_shares is defined
+
+  - name: set permission of all folders in directory tree to 2755
+    become: yes
+    command: find {{ item.path }} -type d ! -perm 2755 -exec chmod 2755 {} \; -exec echo "{}" \;
+    with_items: "{{ public_readonly_file_shares }}"
+    when: public_readonly_file_shares is defined
+    register: result
+    changed_when: result.stdout | length > 0
+
+  - name: set permission of all files in directory tree to 644
+    become: yes
+    command: find {{ item.path }} -type f ! -perm 644 -exec chmod 644 {} \; -exec echo "{}" \;
+    with_items: "{{ public_readonly_file_shares }}"
+    when: public_readonly_file_shares is defined
+    register: result
+    changed_when: result.stdout | length > 0
+
+    # private shared files
+
   - name: create local file structure for private shared files
     become: yes
-    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="0770" recurse=no state=directory follow=no
+    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="2770" state=directory
     with_items: "{{ private_file_shares }}"
     when: private_file_shares is defined
+
+  - name: set permission of all folders in directory tree to 2770
+    become: yes
+    command: find {{ item.path }} -type d ! -perm 2770 -exec chmod 2770 {} \; -exec echo "{}" \;
+    with_items: "{{ private_file_shares }}"
+    when: private_file_shares is defined
+    register: result
+    changed_when: result.stdout | length > 0
+
+  - name: set permission of all files in directory tree to 660
+    become: yes
+    command: find {{ item.path }} -type f ! -perm 660 -exec chmod 660 {} \; -exec echo "{}" \;
+    with_items: "{{ private_file_shares }}"
+    when: private_file_shares is defined
+    register: result
+    changed_when: result.stdout | length > 0
