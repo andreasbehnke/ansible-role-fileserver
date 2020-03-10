@@ -24,3 +24,5 @@
     args:
       executable: /bin/bash
     with_items: '{{ samba_users }}'
+    register: smbpasswd
+    changed_when: "'Added user' in smbpasswd.stdout"
