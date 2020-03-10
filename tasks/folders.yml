@@ -4,7 +4,7 @@
 
   - name: create local file structure for public shared files
     become: yes
-    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="2775" state=directory
+    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} state=directory recurse=yes
     with_items: "{{ public_file_shares }}"
     when: public_file_shares is defined
 
@@ -28,7 +28,7 @@
 
   - name: create local file structure for public readonly shared files
     become: yes
-    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="2755" state=directory
+    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} state=directory recurse=yes
     with_items: "{{ public_readonly_file_shares }}"
     when: public_readonly_file_shares is defined
 
@@ -52,7 +52,7 @@
 
   - name: create local file structure for private shared files
     become: yes
-    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} mode="2770" state=directory
+    file: path={{ item.path }} owner={{ samba_force_user }} group={{ samba_force_group }} state=directory recurse=yes
     with_items: "{{ private_file_shares }}"
     when: private_file_shares is defined
 
