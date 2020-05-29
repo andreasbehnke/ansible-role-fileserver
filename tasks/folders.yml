@@ -24,6 +24,18 @@
       - file_mode: "644"
     when: public_readonly_file_shares is defined
 
+  # public read and WRITE shared files
+
+  - name: create folders for public read and WRITE shared files
+    include_tasks: file_permissions.yml
+    vars:
+      - file_shares: "{{public_rw_file_shares}}"
+      - user: "{{samba_force_user}}"
+      - group: "{{samba_force_group}}"
+      - folder_mode: "2777"
+      - file_mode: "666"
+    when: public_rw_file_shares is defined
+
   # private shared files
 
   - name: create folders for private shared files
