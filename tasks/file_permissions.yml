@@ -2,12 +2,12 @@
 
   - name: create local file structure for shared files
     become: yes
-    file: path={{ item.path }} owner={{ user }} group={{ group }} state=directory recurse=no
+    file: path={{ item.path }} owner={{ item.unix_user | default(user) }} group={{ item.unix_group | default(group) }} state=directory recurse=no
     with_items: "{{ file_shares }}"
 
-  - name: set owner and group to {{ user }}:{{ group }} for shared files
+  - name: set owner and group for shared files
     become: yes
-    command: find {{ item.path }} ! -user {{ user }} ! -group {{ group }} ! -name 'lost+found' -exec chown {{ user }}:{{ group }} {} \; -exec echo "{}" \;
+    command: find {{ item.path }} ! -user {{ item.unix_user | default(user) }} ! -group {{ item.unix_group | default(group) }} ! -name 'lost+found' -exec chown {{ item.unix_user | default(user) }}:{{ item.unix_group | default(group) }} {} \; -exec echo "{}" \;
     with_items: "{{ file_shares }}"
     register: result
     changed_when: result.stdout | length > 0

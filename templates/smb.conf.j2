@@ -315,10 +315,14 @@ path = {{ share.path }}
 browsable = yes
 guest ok = no
 read only = yes
-write list = {{ samba_write_list }}
+write list = {{ share.samba_user | default(samba_write_list) }}
+{% if share.samba_user is defined %}
+read list = {{ share.samba_user }}
+valid users = {{ share.samba_user }}
+{% endif %}
 create mask = 0660
-force user = {{ samba_force_user }}
-force group = {{ samba_force_group }}
+force user = {{ share.unix_user | default(samba_force_user) }}
+force group = {{ share.unix_group | default(samba_force_group) }}
 force directory mode = 0770
 force create mode = 0660
 {% endfor %}
