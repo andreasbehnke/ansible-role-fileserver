@@ -1,5 +1,6 @@
 ---
 
+ - include: avahi.yml
  - include: samba.yml
  - include: nfs.yml
  - include: users.yml

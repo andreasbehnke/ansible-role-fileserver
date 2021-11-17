@@ -31,6 +31,10 @@
 # server string is the equivalent of the NT Description field
 	server string = %h server (Samba, Ubuntu)
 
+# set min protocol version to NT1 so all smb clients are able to browser samba shares. 
+# Otherwise browse list of available shares will not work.
+   server min protocol = NT1
+
 # Windows Internet Name Serving Support Section:
 # WINS Support - Tells the NMBD component of Samba to enable its WINS Server
 #   wins support = no

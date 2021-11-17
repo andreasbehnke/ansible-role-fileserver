@@ -1,0 +1,5 @@
+---
+
+  - name: install avahi daemon for zerconf support
+    become: yes
+    apt: name=avahi-daemon state=latest
