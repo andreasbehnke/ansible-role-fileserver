@@ -24,12 +24,6 @@ Support file sharing for different operating systems
 
 ## Types of services
 
-### NFS (Network File Service)
-
-This service must be global enabled only public_file_shares and public_readonly_file_shares
-are supported and will be exported. NFS is not encrypted, so exporting private file shares makes
-no sense.
-
 ### SMB
 
 This network file protocol is used by windows client. Samba is used as file server and configuration

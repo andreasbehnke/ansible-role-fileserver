@@ -2,6 +2,5 @@
 
  - include_tasks: avahi.yml
  - include_tasks: samba.yml
- - include_tasks: nfs.yml
  - include_tasks: users.yml
  - include_tasks: folders.yml
