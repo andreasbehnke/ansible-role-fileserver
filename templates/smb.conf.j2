@@ -333,3 +333,21 @@ force directory mode = 0770
 force create mode = 0660
 {% endfor %}
 {% endif %}
+
+{% if private_readonly_file_shares is defined %}
+# private file shares, no guest access, readonly
+
+{% for share in private_readonly_file_shares %}
+
+[{{ share.name }}]
+path = {{ share.path }}
+browsable = yes
+guest ok = no
+read only = yes
+write list =
+{% if share.samba_user is defined %}
+read list = {{ share.samba_user }}
+valid users = {{ share.samba_user }}
+{% endif %}
+{% endfor %}
+{% endif %}

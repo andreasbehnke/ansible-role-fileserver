@@ -22,6 +22,12 @@ Support file sharing for different operating systems
     * provide read/write access to authenticated users
     * authenticated users can change files of each other
 
+### private_readonly_file_shares
+
+    * access for anonymous users is prohibted
+    * provide readonly access to authenticated users
+    * authenticated users can read files of each other
+
 ## Types of services
 
 ### SMB
