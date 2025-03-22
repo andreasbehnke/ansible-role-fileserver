@@ -56,6 +56,6 @@
       - file_shares: "{{private_readonly_file_shares}}"
       - user: "{{samba_force_user}}"
       - group: "{{samba_force_group}}"
-      - folder_mode: "2550"
-      - file_mode: "440"
+      - folder_mode: "2770"
+      - file_mode: "660"
     when: private_readonly_file_shares is defined
