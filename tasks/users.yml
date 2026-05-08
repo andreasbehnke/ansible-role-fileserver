@@ -26,3 +26,5 @@
     with_items: '{{ samba_users }}'
     register: smbpasswd
     changed_when: "'Added user' in smbpasswd.stdout"
+    notify:
+      - restart samba
