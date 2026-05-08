@@ -5,11 +5,11 @@
   - name: create folders for public shared files
     include_tasks: file_permissions.yml
     vars:
-      - file_shares: "{{public_file_shares}}"
-      - user: "{{samba_force_user}}"
-      - group: "{{samba_force_group}}"
-      - folder_mode: "2775"
-      - file_mode: "664"
+      file_shares: "{{public_file_shares}}"
+      user: "{{samba_force_user}}"
+      group: "{{samba_force_group}}"
+      folder_mode: "2775"
+      file_mode: "664"
     when: public_file_shares is defined
 
   # public readonly shared files
@@ -17,11 +17,11 @@
   - name: create folders for public readonly shared files
     include_tasks: file_permissions.yml
     vars:
-      - file_shares: "{{public_readonly_file_shares}}"
-      - user: "{{samba_force_user}}"
-      - group: "{{samba_force_group}}"
-      - folder_mode: "2755"
-      - file_mode: "644"
+      file_shares: "{{public_readonly_file_shares}}"
+      user: "{{samba_force_user}}"
+      group: "{{samba_force_group}}"
+      folder_mode: "2755"
+      file_mode: "644"
     when: public_readonly_file_shares is defined
 
   # public read and WRITE shared files
@@ -29,11 +29,11 @@
   - name: create folders for public read and WRITE shared files
     include_tasks: file_permissions.yml
     vars:
-      - file_shares: "{{public_rw_file_shares}}"
-      - user: "{{samba_force_user}}"
-      - group: "{{samba_force_group}}"
-      - folder_mode: "2777"
-      - file_mode: "666"
+      file_shares: "{{public_rw_file_shares}}"
+      user: "{{samba_force_user}}"
+      group: "{{samba_force_group}}"
+      folder_mode: "2777"
+      file_mode: "666"
     when: public_rw_file_shares is defined
 
   # private shared files
@@ -41,11 +41,11 @@
   - name: create folders for private shared files
     include_tasks: file_permissions.yml
     vars:
-      - file_shares: "{{private_file_shares}}"
-      - user: "{{samba_force_user}}"
-      - group: "{{samba_force_group}}"
-      - folder_mode: "2770"
-      - file_mode: "660"
+      file_shares: "{{private_file_shares}}"
+      user: "{{samba_force_user}}"
+      group: "{{samba_force_group}}"
+      folder_mode: "2770"
+      file_mode: "660"
     when: private_file_shares is defined
 
   # private readonly shared files
@@ -53,9 +53,9 @@
   - name: create folders for private readonly shared files
     include_tasks: file_permissions.yml
     vars:
-      - file_shares: "{{private_readonly_file_shares}}"
-      - user: "{{samba_force_user}}"
-      - group: "{{samba_force_group}}"
-      - folder_mode: "2770"
-      - file_mode: "660"
+      file_shares: "{{private_readonly_file_shares}}"
+      user: "{{samba_force_user}}"
+      group: "{{samba_force_group}}"
+      folder_mode: "2770"
+      file_mode: "660"
     when: private_readonly_file_shares is defined
